@@ -1,39 +1,41 @@
-# CompactarLogsAtestadoDigital
+# CompactarArquivos
 
 ## Visão Geral
 
-**CompactarLogsAtestadoDigital** é uma ferramenta para compactar arquivos de log e, opcionalmente, excluir logs compactados antigos. O projeto foi desenvolvido para rodar como aplicação de console no `.NET Framework 4.7.2`.
+**CompactarArquivos** é uma ferramenta para compactar arquivos, opcionalmente, excluir arquivos compactados antigos. O projeto foi desenvolvido para rodar como aplicação de console no `.NET Framework 4.7.2`.
 
 ## Funcionalidades
 
-- **Compactação de Logs:** Cria um arquivo ZIP com todos os arquivos `.txt` de log em um diretório especificado, nomeando o arquivo com o ano e mês atual.
+- **Compactação de Arquivos:** Cria um arquivo ZIP com todos os arquivos em um diretório especificado, nomeando o arquivo com o ano e mês atual.
 - **Exclusão de Arquivos Antigos:** Opcionalmente, exclui arquivos ZIP mais antigos que uma quantidade de dias definida.
 
 ## Como Usar
 
 Execute o aplicativo via linha de comando com os seguintes parâmetros:
  ```
-  CompactarLogsAtestadoDigital.exe <DiretorioLog> [del <Dias>]
+  CompactarArquivos.exe <local do arquivo> <extencao a ser compactada> <nome do arquivo compactado> [del] [30]
  ```
 ### Parâmetros
 
-- `<DiretorioLog>`: (Obrigatório) Caminho para o diretório onde estão os arquivos de log.
+- `<Diretorio>`: (Obrigatório) Caminho para o diretório onde estão os arquivos.
+- `<extenção do arquivo>`: (Obrigatório) Informar a extenção do arquivo a ser compactado.
+- `<nome do arquivo a ser compactado>`: (Obrigatório) Informar o nome do arquivo a ser compactado.
 - `del <Dias>`: (Opcional) Se informado, exclui arquivos ZIP mais antigos que `<Dias>` dias.
 
 ### Exemplos
 
-- **Apenas compactar logs:**
+- **Apenas compactar arquivos:**
   ```
-    CompactarLogsAtestadoDigital.exe "C:\AtestadoDigital\Log"
+    CompactarArquivos.exe "C:\Arquivos\Log" ".csv" "Planilhas"
   ```
-- **Compactar logs e excluir arquivos ZIP com mais de 30 dias:**
+- **Compactar arquivos e excluir arquivos ZIP com mais de 30 dias:**
  ```
-    CompactarLogsAtestadoDigital.exe "C:\AtestadoDigital\Log" del 30
+    CompactarArquivos.exe "C:\Arquivos\Log" ".csv" "Planilhas" del 30
  ```
 
 ## Funcionamento
 
-1. **Compactação:** Todos os arquivos `.txt` do diretório informado são adicionados a um arquivo ZIP chamado `{yyyy_MM} Logs Compentencia.zip`.
+1. **Compactação:** Todos os arquivos com base no formato informado no paramentro `extenção do arquivo` do diretório informado são adicionados a um arquivo ZIP.
 2. **Exclusão:** Se o parâmetro `del <Dias>` for informado, todos os arquivos `.zip` do diretório com mais de `<Dias>` dias são excluídos.
 
 ## Requisitos

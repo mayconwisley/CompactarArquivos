@@ -1,15 +1,14 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.IO.Compression;
 
-namespace CompactarLogsAtestadoDigital
+namespace CompactarArquivos
 {
     internal static class CompactLog
     {
-        public static void Compact(string pathFilesLogs)
+        public static void Compact(string pathFilesLogs, string fileExtension, string fileName)
         {
-            string zipPath = Path.Combine(pathFilesLogs, $@"{DateTime.Now:yyyy_MM} Logs Compentencia.zip");
-            var filesDirectory = Directory.GetFiles(pathFilesLogs, "*.txt", SearchOption.TopDirectoryOnly);
+            string zipPath = Path.Combine(pathFilesLogs, $@"{fileName}.zip");
+            var filesDirectory = Directory.GetFiles(pathFilesLogs, $"*{fileExtension}", SearchOption.TopDirectoryOnly);
 
             // Cria um arquivo zip vazio
             using (FileStream zipToOpen = new FileStream(zipPath, FileMode.Create))
