@@ -9,6 +9,7 @@
 Você pode baixar o executável compilado clicando no link abaixo:
 
 [Download do CompactarArquivos.exe](https://github.com/mayconwisley/CompactarArquivos/raw/refs/heads/master/Download/CompactarArquivos.exe)
+
 [Download do CompactarArquivos.bat](https://github.com/mayconwisley/CompactarArquivos/raw/refs/heads/master/CompactarArquivos.bat)
 
 ## Funcionalidades
