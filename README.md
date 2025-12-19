@@ -4,6 +4,13 @@
 
 **CompactarArquivos** é uma ferramenta para compactar arquivos, opcionalmente, excluir arquivos compactados antigos. O projeto foi desenvolvido para rodar como aplicação de console no `.NET Framework 4.7.2`.
 
+## Download
+
+Você pode baixar o executável compilado clicando no link abaixo:
+
+[Download do CompactarArquivos.exe](https://github.com/mayconwisley/CompactarArquivos/raw/refs/heads/master/Download/CompactarArquivos.exe)
+[Download do CompactarArquivos.bat](https://github.com/mayconwisley/CompactarArquivos/raw/refs/heads/master/CompactarArquivos.bat)
+
 ## Funcionalidades
 
 - **Compactação de Arquivos:** Cria um arquivo ZIP com todos os arquivos em um diretório especificado, nomeando o arquivo com o ano e mês atual.
