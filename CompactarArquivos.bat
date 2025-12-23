@@ -9,10 +9,6 @@ if "%~1"=="" (
     echo.
     echo Uso:
     echo   compactar.bat "C:\Arquivos\Log" ".csv" "Planilhas" [del] [30]
-    echo.
-    echo Exemplo:
-    echo   compactar.bat "C:\Arquivos\Log" ".csv" "Planilhas"
-    echo   compactar.bat "C:\Arquivos\Log" ".csv" "Planilhas" del 30
     exit /b 1
 )
 
@@ -37,36 +33,42 @@ if errorlevel 1 (
 )
 
 :: ============================
-:: Compactação
+:: Compactação com tar.exe
 :: ============================
 set "ZIP_PATH=%PATH_FILES%\%ZIP_NAME%.zip"
 
+pushd "%PATH_FILES%" || exit /b 1
+
 echo Compactando arquivos %EXTENSION% em %ZIP_PATH% ...
 
-powershell -NoProfile -Command ^
-    "Compress-Archive -Path '%PATH_FILES%\*%EXTENSION%' -DestinationPath '%ZIP_PATH%' -Force"
+:: Remove o ZIP se já existir (equivalente ao FileMode.Create)
+if exist "%ZIP_PATH%" del "%ZIP_PATH%"
+
+tar -a -c -f "%ZIP_PATH%" *%EXTENSION%
 
 if errorlevel 1 (
     echo Erro ao compactar arquivos.
+    popd
     exit /b 1
 )
 
+popd
 echo Compactação concluída.
 
 :: ============================
-:: Exclusão opcional
+:: Exclusão opcional (ZIP antigos)
 :: ============================
 if /I "%DEL_FLAG%"=="del" (
     if "%DEL_DAYS%"=="" (
-        echo Parâmetro de dias não informado para exclusão.
+        echo Quantidade de dias não informada.
         exit /b 1
     )
 
     echo Excluindo arquivos ZIP com mais de %DEL_DAYS% dias...
 
-    powershell -NoProfile -Command ^
-        "Get-ChildItem '%PATH_FILES%\*.zip' | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-%DEL_DAYS%) } | Remove-Item -Force"
+    forfiles /P "%PATH_FILES%" /M *.zip /D -%DEL_DAYS% /C "cmd /c del @path"
 
     echo Exclusão concluída.
 )
+
 endlocal
